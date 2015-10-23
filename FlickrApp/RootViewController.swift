@@ -3,10 +3,12 @@ import UIKit
 
 class RootViewController: UIViewController {
 
+    @IBOutlet weak var imageContainterCentreConstraint: NSLayoutConstraint!
    // @IBOutlet var showFavourites: UIBarButtonItem!
     @IBOutlet var showInfoi: UINavigationItem!
 
-
+    
+    private var displayEmbeddedViewController: DisplayViewController!
     @IBOutlet weak var displayContainer: UIView!
     
     enum SelectionState {
@@ -17,8 +19,6 @@ class RootViewController: UIViewController {
     
     var selectionState = SelectionState.NoSelection
     
-
-    @IBOutlet weak var imageContainerCentreConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,10 +33,12 @@ class RootViewController: UIViewController {
             println("Touches Began")
         case .Ended:
             println("Touches Ended")
-            imageContainerCentreConstraint.constant = 0
+          imageContainterCentreConstraint.constant = 0
             UIView.animateWithDuration(0.3, animations: {
                 () -> Void in
+                self.displayEmbeddedViewController.view.transform = CGAffineTransformIdentity
                 self.view.layoutIfNeeded()
+                
                 },
                 completion: {
                     (completed) -> Void in
@@ -54,8 +56,16 @@ class RootViewController: UIViewController {
             println("Touches Continued")
             var translation = sender.translationInView(self.view)
             if abs(translation.x) < view.bounds.size.width / 2 {
-               imageContainerCentreConstraint.constant = -translation.x
-                view.layoutIfNeeded()
+                
+                
+                if abs(translation.y) > 60 {
+                    displayEmbeddedViewController.view.transform = CGAffineTransformMakeScale( 1 - (abs(translation.y - 60) / ((view.bounds.width - 120 / 2))), 1 - (abs(translation.y - 60) / ((view.bounds.width - 120  / 2))))
+                    //displayEmbeddedViewController.view.center = CGPointMake(self.view.bounds.width / 2 + self.view.bounds.width / 2 * translation.x, 30)
+                } else {
+                    imageContainterCentreConstraint.constant = -translation.x
+                    view.layoutIfNeeded()
+                }
+                
             } else {
                 if ((view.bounds.size.width / 2) + translation.x > view.bounds.size.width) {
                     println("Faves Selected")
@@ -78,7 +88,13 @@ class RootViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let vc = segue.destinationViewController as? DisplayViewController
+            where segue.identifier == "ImageContainerSegue" {
+                self.displayEmbeddedViewController = vc
+        }
+    }
     /*
     // MARK: - Navigation
 

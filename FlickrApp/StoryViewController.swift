@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StoryCollectionViewController: UIViewController {
+class StoryViewController: UIViewController {
     
     var currentStory = ""
     

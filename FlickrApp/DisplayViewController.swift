@@ -18,7 +18,7 @@ class DisplayViewController: UIViewController {
     
    // http://stackoverflow.com/questions/29582200/how-do-i-get-the-views-inside-a-container-in-swift
     
-    private var embeddedViewController: StoryCollectionViewController!
+    private var embeddedViewController: StoryViewController!
     
     @IBAction func showStory(sender: AnyObject) {
         println("STORY!")
@@ -163,12 +163,10 @@ class DisplayViewController: UIViewController {
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let vc = segue.destinationViewController as? StoryCollectionViewController
+        if let vc = segue.destinationViewController as? StoryViewController
             where segue.identifier == "EmbedSegue" {
                 self.embeddedViewController = vc
-                //var chosenStory = mockStories[counter]
-                //vc.currentStory = chosenStory
-                //vc.updateText()
+             
         }
     }
 
