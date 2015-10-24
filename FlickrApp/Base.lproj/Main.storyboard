@@ -302,7 +302,7 @@
                     </view>
                     <toolbarItems/>
                     <connections>
-                        <outlet property="imageArray" destination="uLQ-cL-dms" id="vcy-Sl-QKS"/>
+                        <outlet property="flickrImage" destination="uLQ-cL-dms" id="frE-pI-lvC"/>
                         <outlet property="storyContainer" destination="B1P-23-HtY" id="Oer-Fq-r2K"/>
                         <outlet property="testArray" destination="4we-18-cZC" id="Ua0-hx-tdZ"/>
                     </connections>

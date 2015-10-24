@@ -18,6 +18,12 @@ class DisplayViewController: UIViewController {
     
    // http://stackoverflow.com/questions/29582200/how-do-i-get-the-views-inside-a-container-in-swift
     
+   // private var flickrAPIViewController: FlickrAPIViewController!
+    
+    private let imageDataSource = FlickrData()
+    
+    var photoArray:[[String:AnyObject]] = []
+    
     private var embeddedViewController: StoryViewController!
     
     @IBAction func showStory(sender: AnyObject) {
@@ -37,9 +43,11 @@ class DisplayViewController: UIViewController {
         
     }
   
-    @IBOutlet var imageArray: UIImageView!
+    @IBOutlet var flickrImage: UIImageView!
     
     var mockImages = ["day44.jpg", "day45.jpg", "day47.jpg", "day48.jpg", "day49.jpg"]
+    
+   
     
     // counter = 0
 
@@ -85,9 +93,20 @@ class DisplayViewController: UIViewController {
     }
 
     func updateImage() {
-        var chosenImage: UIImage = UIImage (named: (mockImages[counter]))!
-        imageArray.image = chosenImage
-        println("\(chosenImage)")
+        
+        if let imageUrl:String = photoArray[counter]["url_m"] as? String{
+            println(imageUrl)
+            let imageURL = NSURL(string: imageUrl)
+            if let imageData = NSData(contentsOfURL: imageURL!) {
+                flickrImage.image = UIImage(data: imageData)
+            } else {
+                println("Image does not exist at \(imageURL)")
+            }
+        }
+        
+//        var chosenImage: UIImage = UIImage (named: (mockImages[counter]) as! String)!
+//        imageArray.image = chosenImage
+//        println("\(chosenImage)")
         
     }
     
@@ -101,6 +120,12 @@ class DisplayViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         storyContainer.alpha = 0.0
+         imageDataSource.getImagesFromFlickrWithCallback {
+                (images) -> () in
+            self.photoArray = images
+            
+        }
+        
     }
 
     // *******************

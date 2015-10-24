@@ -3,6 +3,8 @@ import UIKit
 
 class FlickrAPIViewController: UIViewController {
     
+    private var displayViewController: DisplayViewController!
+    
     let baseURL = "https://api.flickr.com/services/rest"
     let methodName = "flickr.galleries.getPhotos"
     let APIKey = "88ee32cee1b0938e096f3307a996b280"
@@ -55,6 +57,10 @@ class FlickrAPIViewController: UIViewController {
                         if let imageData = NSData(contentsOfURL: imageURL!) {
                             dispatch_async(dispatch_get_main_queue(), {
                                 // fill this in!!!
+                                
+                                // pass photoTitle array
+                                // pass imageUrlString array
+                                // pass the image info
                             })
                         } else {
                             println("Image does not exist at \(imageURL)")
@@ -92,7 +98,14 @@ class FlickrAPIViewController: UIViewController {
         
         return (!urlVars.isEmpty ? "?" : "") + join("&", urlVars)
     }
-
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let vc = segue.destinationViewController as? DisplayViewController
+            where segue.identifier == "DisplaySegue" {
+                self.displayViewController = vc
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
