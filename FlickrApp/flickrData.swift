@@ -14,12 +14,12 @@ class FlickrData: NSObject {
     
     
     let photosetID = "72157612629420900"
-    //let userID = "33185468@N02"
-    //let extras = "url_m"
+    let userID = "33185468@N02"
+    let extras = "url_m"
     
     
     //GAVIN *** need extras to have multiple items: description and url_m
-    let extras = "description" // extras should also include "url_m"
+    //let extras = "description" // extras should also include "url_m"
     let dataFormat = "json"
     let noJSONCallback = "1"
     
@@ -49,31 +49,16 @@ class FlickrData: NSObject {
 //                println("response \(response)")
                 var parsingError: NSError? = nil
                 let parsedResult: AnyObject! = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &parsingError)
+                let parsedDictionary = parsedResult as! NSDictionary
                 println("\(parsedResult)")
                 
-                if let photosDictionary = parsedResult.valueForKey("photos") as? NSDictionary {
+                //if let photosDictionary = parsedResult.valueForKey("photos") as? NSDictionary {
+                if let photosDictionary = parsedDictionary.valueForKey("photoset") as? NSDictionary {
                     if let photoArray = photosDictionary.valueForKey("photo") as? [[String: AnyObject]] {
-                        
-                     //   let photoTitle = photosDictionary["title"] as? String
-//                        let titleArray = photosDictionary["title"] as? String
+
                      callback(photoArray)
                        
-                        // grabs a single image *** may need to fix
-//                        let PhotoIndex = Int(photoArray.count)
-//                        let photoDictionary = photoArray[PhotoIndex] as [String: AnyObject]
-//                        
-//                        // get the image url and title
-//                        let photoTitle = photoDictionary["title"] as? String
-//                        let imageUrlString = photoDictionary["url_m"] as? String
-//                        let imageURL = NSURL(string: imageUrlString!)
-//                        
-//                        if let imageData = NSData(contentsOfURL: imageURL!) {
-//                            dispatch_async(dispatch_get_main_queue(), {
-//                              
-//                            })
-//                        } else {
-//                            println("Image does not exist at \(imageURL)")
-//                        }
+                       
                     } else {
                         println("Can't find key 'photo' in \(photosDictionary)")
                         

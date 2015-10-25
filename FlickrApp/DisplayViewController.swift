@@ -45,12 +45,6 @@ class DisplayViewController: UIViewController {
   
     @IBOutlet var flickrImage: UIImageView!
     
-    var mockImages = ["day44.jpg", "day45.jpg", "day47.jpg", "day48.jpg", "day49.jpg"]
-    
-   
-    
-    // counter = 0
-
     
     @IBOutlet var storyContainer: UIView!
     
@@ -58,29 +52,21 @@ class DisplayViewController: UIViewController {
     
     //  @IBOutlet var showStory: UIButton!
     
-    var mockTitles = ["Day 44", "Day 45", "day 47", "day 48", "day 49"]
-    
-    var mockStories = ["The Two-Year Itch.", "Allison tries really hard to convince people that she's not that good a person, but I know she's full of shit.  It's not just anybody, who when overhearing a co-worker saying their dad just had an operation and needs a walker but can't afford one, volunteers her own grandpa's walker.  Maybe it was one of those things you just saaaay, not expecting anyone to actually follow up on the nice thought. This is her the next morning, eating her words.", "The End of The World.", "Chrysler and Fiat walk the walk."]
+  
     
     var counter = 0
     //var storyAlpha:UIView = UIView(storyContainer)
     
     @IBAction func nextLabel(sender: AnyObject) {
         println("tapped!")
-        if counter >= mockTitles.count {
-            counter = 0
-        }
-        if counter >= mockImages.count {
-            counter = 0
-        }
-        if counter >= mockStories.count {
+        if counter >= photoArray.count {
             counter = 0
         }
         
         
-        // updateLabel()
+       // updateLabel()
         updateImage()
-        updateStory()
+      //  updateStory()
         counter++
     }
     
@@ -95,27 +81,41 @@ class DisplayViewController: UIViewController {
     func updateImage() {
         
         println("test for gavin --- *** --- \(photoArray)")
-        if let imageUrl:String = photoArray[counter]["url_m"] as? String{
-            println(imageUrl)
-            let imageURL = NSURL(string: imageUrl)
+        
+        let currentPhoto = photoArray[counter] as NSDictionary
+        
+        let farmID = String(currentPhoto.valueForKey("farm") as! Int)
+        let imageID = currentPhoto.valueForKey("id") as! String
+        let serverID = currentPhoto.valueForKey("server") as! String
+        let secretID = currentPhoto.valueForKey("secret") as! String
+        
+        let flickrTitle = currentPhoto.valueForKey("title") as! String
+        
+        // https://farm{farm-id}.staticflickr.com/{server-id}/{id {secret}.jpg
+        let flickrURL = "https://farm" + farmID + ".staticflickr.com/" + serverID + "/" + imageID + "_" + secretID + ".jpg"
+        
+      // if let imageUrl:String = photoArray[counter]["url_m"] as? String{
+        
+        println("Image Url: \(flickrURL)")
+            let imageURL = NSURL(string: flickrURL)
             if let imageData = NSData(contentsOfURL: imageURL!) {
                 flickrImage.image = UIImage(data: imageData)
                 
-                testArray.text = photoArray[counter]["title"] as! String
-                
+                testArray.text = flickrTitle
+             
+                if let description = currentPhoto.valueForKey("description") as? NSDictionary {
+                    
+                    if let story = description.valueForKey("_content") as? String {
+                        self.updateStory( story )
+                    }
+                }
             } else {
                 println("Image does not exist at \(imageURL)")
             }
         }
         
-//        var chosenImage: UIImage = UIImage (named: (mockImages[counter]) as! String)!
-//        imageArray.image = chosenImage
-//        println("\(chosenImage)")
-        
-    }
     
-    func updateStory() {
-        var chosenStory = mockStories[counter]
+    func updateStory( chosenStory:String ) {
         embeddedViewController.currentStory = chosenStory
         embeddedViewController.updateText()
         
@@ -157,14 +157,5 @@ class DisplayViewController: UIViewController {
         }
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
