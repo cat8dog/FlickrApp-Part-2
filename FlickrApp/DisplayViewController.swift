@@ -78,19 +78,19 @@ class DisplayViewController: UIViewController {
         }
         
         
-        updateLabel()
+        // updateLabel()
         updateImage()
         updateStory()
         counter++
     }
     
     
-    
-    func updateLabel() {
-        var chosenTitle = mockTitles[counter]
-        testArray.text = chosenTitle
-        println("\(chosenTitle)")
-    }
+//    
+//    func updateLabel() {
+//        var chosenTitle = mockTitles[counter]
+//        testArray.text = chosenTitle
+//        println("\(chosenTitle)")
+//    }
 
     func updateImage() {
         
@@ -100,6 +100,9 @@ class DisplayViewController: UIViewController {
             let imageURL = NSURL(string: imageUrl)
             if let imageData = NSData(contentsOfURL: imageURL!) {
                 flickrImage.image = UIImage(data: imageData)
+                
+                testArray.text = photoArray[counter]["title"] as! String
+                
             } else {
                 println("Image does not exist at \(imageURL)")
             }
