@@ -4,11 +4,15 @@ import Foundation
 class FlickrData: NSObject {
     
     
-    let baseURL = "https://api.flickr.com/services/rest"
-    let methodName = "flickr.galleries.getPhotos"
+   let baseURL = "https://api.flickr.com/services/rest"
+    //let methodName = "flickr.galleries.getPhotos"
+    let methodName = "flickr.photosets.getPhotos"
     let APIKey = "88ee32cee1b0938e096f3307a996b280"
-    let galleryID = "136294158-72157659526447160"
-    let extras = "url_m"
+    //let galleryID = "136294158-72157659526447160"
+    let photosetID = "72157612629420900"
+    //let userID = "33185468@N02"
+    //let extras = "url_m"
+    let extras = "description" // extras should also include "url_m"
     let dataFormat = "json"
     let noJSONCallback = "1"
     
@@ -17,7 +21,9 @@ class FlickrData: NSObject {
         let methodArguments = [
             "method": methodName,
             "api_key": APIKey,
-            "gallery_id": galleryID,
+            //"gallery_id": galleryID,
+            "photoset_id": photosetID,
+            //"user_id": userID,
             "extras": extras,
             "format": dataFormat,
             "nojsoncallback": noJSONCallback
