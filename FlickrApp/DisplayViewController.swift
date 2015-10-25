@@ -94,6 +94,7 @@ class DisplayViewController: UIViewController {
 
     func updateImage() {
         
+        println("test for gavin --- *** --- \(photoArray)")
         if let imageUrl:String = photoArray[counter]["url_m"] as? String{
             println(imageUrl)
             let imageURL = NSURL(string: imageUrl)
@@ -123,57 +124,15 @@ class DisplayViewController: UIViewController {
          imageDataSource.getImagesFromFlickrWithCallback {
                 (images) -> () in
             self.photoArray = images
+            println("******Hi Cat!*****")
+    
+            println("BLLAAAAH \(self.photoArray)")
             
         }
         
     }
 
-    // *******************
-    
-//    @IBAction func didPan(sender: UIPanGestureRecognizer) {
-//        switch sender.state {
-//        case .Began:
-//            println("Touches Began")
-//        case .Ended:
-//            println("Touches Ended")
-//            imageContainerCentreConstraint.constant = 0
-//            UIView.animateWithDuration(0.3, animations: {
-//                 () -> Void in
-//                    self.view.layoutIfNeeded()
-//                },
-//                completion: {
-//                    (completed) -> Void in
-//                    if completed {
-//                        if self.selectionState == .FavouritesSwipe {
-//                            self.performSegueWithIdentifier("FaveSegue", sender: self)
-//                        } else if self.selectionState == .RejectedSwipe {
-//                            self.performSegueWithIdentifier("RejectSegue", sender: self)
-//                        }
-//                        self.selectionState = .NoSelection
-//                    }
-//            })
-//            
-//        default:
-//            println("Touches Continued")
-//            var translation = sender.translationInView(self.view)
-//            if abs(translation.x) < view.bounds.size.width / 2 {
-//                imageContainerCentreConstraint.constant = -translation.x
-//                view.layoutIfNeeded()
-//            } else {
-//                if ((view.bounds.size.width / 2) + translation.x > view.bounds.size.width) {
-//                    println("Faves Selected")
-//                    selectionState = .FavouritesSwipe
-//                } else if ((view.bounds.size.width / 2) + translation.x < 0) {
-//                    println("Reject Selected")
-//                    selectionState = .RejectedSwipe
-//                } else {
-//                    println("Nothing selected")
-//                    selectionState = .NoSelection
-//                }
-//            }
-//        }
-//        
-//    }
+
     
 
     override func viewDidAppear(animated: Bool) {

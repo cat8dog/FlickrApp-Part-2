@@ -32,12 +32,19 @@ class FlickrData: NSObject {
             if let error = downloadError {
                 println("Could not complete the request \(error)")
             } else {
+//                println("Gavin says hi!")
+//                println("response \(response)")
                 var parsingError: NSError? = nil
                 let parsedResult: AnyObject! = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &parsingError)
+                println("\(parsedResult)")
                 
                 if let photosDictionary = parsedResult.valueForKey("photos") as? NSDictionary {
                     if let photoArray = photosDictionary.valueForKey("photo") as? [[String: AnyObject]] {
-                        callback(photoArray)
+                        
+                     //   let photoTitle = photosDictionary["title"] as? String
+//                        let titleArray = photosDictionary["title"] as? String
+                     callback(photoArray)
+                       
                         // grabs a single image *** may need to fix
 //                        let PhotoIndex = Int(photoArray.count)
 //                        let photoDictionary = photoArray[PhotoIndex] as [String: AnyObject]
@@ -56,7 +63,9 @@ class FlickrData: NSObject {
 //                        }
                     } else {
                         println("Can't find key 'photo' in \(photosDictionary)")
+                        
                     }
+                
                     
                 } else {
                     println("Can't find key 'photos' in \(parsedResult)")
