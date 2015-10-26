@@ -15,7 +15,7 @@ class FlickrData: NSObject {
     
     let photosetID = "72157612629420900"
     let userID = "33185468@N02"
-    let extras = "url_m"
+    let extras = "description"
     
     
     //GAVIN *** need extras to have multiple items: description and url_m

@@ -104,9 +104,10 @@ class DisplayViewController: UIViewController {
                 testArray.text = flickrTitle
              
                 if let description = currentPhoto.valueForKey("description") as? NSDictionary {
-                    
+                    println("test 1")
                     if let story = description.valueForKey("_content") as? String {
                         self.updateStory( story )
+                        println("test 2")
                     }
                 }
             } else {
