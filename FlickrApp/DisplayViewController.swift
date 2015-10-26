@@ -11,6 +11,14 @@ class DisplayViewController: UIViewController {
     
     private let imageDataSource = FlickrData()
     
+    // eventually should be set up to save images to FavouritesViewController.
+    @IBAction func saveFavourite(sender: AnyObject) {
+        var selectedPhoto = photoArray[counter]
+        //updateImage()
+        
+            
+        }
+    
    
     
     var photoArray:[[String:AnyObject]] = []
@@ -36,22 +44,22 @@ class DisplayViewController: UIViewController {
 //        }
 //        
 //    }
-//    @IBAction func showStory(sender: AnyObject) {
-//        println("STORY!")
-//        
-//        var alpha:CGFloat = 1.0
-//        
-//        if self.storyContainer.alpha == 1.0 {
-//            alpha = 0.0
-//        }
-//        
-//        UIView.animateWithDuration(0.3, animations: { () -> Void in
-//            
-//            self.storyContainer.alpha = alpha
-//        })
-//        
-//        
-//    }
+    @IBAction func showStory(sender: AnyObject) {
+        println("STORY!")
+        
+        var alpha:CGFloat = 1.0
+        
+        if self.storyContainer.alpha == 1.0 {
+            alpha = 0.0
+        }
+        
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            
+            self.storyContainer.alpha = alpha
+        })
+        
+        
+    }
   
     @IBOutlet var flickrImage: UIImageView!
     
@@ -179,23 +187,7 @@ class DisplayViewController: UIViewController {
      }
     }
     
-        
-//        if self.storyContainer.alpha == 0.5 {
-//        alpha = 0.0
-//        println("/(alpha)")
-//        }
-//        
-//        UIView.animateWithDuration(0.3, animations: { () -> Void in
-//        
-//        self.storyContainer.alpha = alpha
-//        })
-//        }
-    
 
-    override func viewDidAppear(animated: Bool) {
-   //     self.embeddedViewController
-    }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -208,6 +200,9 @@ class DisplayViewController: UIViewController {
             where segue.identifier == "EmbedSegue" {
                 self.embeddedViewController = vc
              
+//        } else if let faveVC = segue.destinationViewController as? FavouritesViewController
+//            where segue.identifier == "segueFave" {
+//            FavouritesViewController
         }
     }
 

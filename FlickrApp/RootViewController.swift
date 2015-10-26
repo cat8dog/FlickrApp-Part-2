@@ -18,7 +18,7 @@ class RootViewController: UIViewController {
     }
     
     var selectionState = SelectionState.NoSelection
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,9 +44,16 @@ class RootViewController: UIViewController {
                     (completed) -> Void in
                     if completed {
                         if self.selectionState == .FavouritesSwipe {
+                            // can ignore this state for now
                             self.performSegueWithIdentifier("FaveSegue", sender: self)
                         } else if self.selectionState == .RejectedSwipe {
-                            self.performSegueWithIdentifier("RejectSegue", sender: self)
+                            
+                            if self.displayEmbeddedViewController.counter >= self.displayEmbeddedViewController.photoArray.count {
+                                self.displayEmbeddedViewController.counter = 0
+                            }
+                            
+                            self.displayEmbeddedViewController.updateImage()
+                            self.displayEmbeddedViewController.counter++
                         }
                         self.selectionState = .NoSelection
                     }

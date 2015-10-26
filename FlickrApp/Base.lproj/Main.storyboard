@@ -273,13 +273,23 @@
                                     <constraint firstAttribute="width" constant="188" id="LNw-LP-TXV"/>
                                     <constraint firstAttribute="height" constant="30" id="fzW-8O-dbu"/>
                                 </constraints>
-                                <state key="normal" title="STORY">
+                                <state key="normal" title="Back">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="showStory:" destination="Rim-AJ-b1T" eventType="touchUpInside" id="USR-Af-qkP"/>
                                 </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fIn-Xu-ylu">
+                                <rect key="frame" x="206" y="451" width="185" height="30"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="185" id="WiK-gv-IW1"/>
+                                </constraints>
+                                <state key="normal" title="Send to Faves">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="0.17999999999999999" colorSpace="calibratedWhite"/>
@@ -310,7 +320,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gPC-7M-GOF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1121" y="809.5"/>
+            <point key="canvasLocation" x="1121" y="809"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="VIj-Sb-BJz">
