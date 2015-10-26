@@ -5,17 +5,6 @@ class DisplayViewController: UIViewController {
     
 
     
-//    
-//    enum SelectionState {
-//        case NoSelection
-//        case FavouritesSwipe
-//        case RejectedSwipe
-//    }
-//
-//    var selectionState = SelectionState.NoSelection
-//    
-//    @IBOutlet weak var imageContainerCentreConstraint: NSLayoutConstraint!
-    
    // http://stackoverflow.com/questions/29582200/how-do-i-get-the-views-inside-a-container-in-swift
     
    // private var flickrAPIViewController: FlickrAPIViewController!
@@ -59,6 +48,7 @@ class DisplayViewController: UIViewController {
     
     @IBAction func nextLabel(sender: AnyObject) {
         println("tapped!")
+     
         if counter >= photoArray.count {
             counter = 0
         }
@@ -82,7 +72,7 @@ class DisplayViewController: UIViewController {
         
         println("test for gavin --- *** --- \(photoArray)")
         
-        let currentPhoto = photoArray[counter] as NSDictionary
+        let currentPhoto = photoArray.reverse()[counter] as NSDictionary
         
         let farmID = String(currentPhoto.valueForKey("farm") as! Int)
         let imageID = currentPhoto.valueForKey("id") as! String
