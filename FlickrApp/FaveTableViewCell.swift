@@ -1,15 +1,12 @@
-//
-//  TableViewCell.swift
-//  FlickrApp
-//
-//  Created by Catherine Reyto on 2015-10-26.
-//  Copyright (c) 2015 Catherine Reyto. All rights reserved.
-//
 
 import UIKit
 
-class TableViewCell: UITableViewCell {
+class FaveTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var thumbnailImageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var storyTextView: UITextView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

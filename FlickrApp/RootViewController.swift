@@ -4,7 +4,8 @@ import UIKit
 class RootViewController: UIViewController {
 
     @IBOutlet weak var imageContainterCentreConstraint: NSLayoutConstraint!
-   // @IBOutlet var showFavourites: UIBarButtonItem!
+   
+    @IBOutlet weak var showFavourites: UIBarButtonItem!
     @IBOutlet var showInfoi: UINavigationItem!
 
     
@@ -23,7 +24,7 @@ class RootViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
+      
     }
     
     
@@ -33,6 +34,7 @@ class RootViewController: UIViewController {
             println("Touches Began")
         case .Ended:
             println("Touches Ended")
+      
           imageContainterCentreConstraint.constant = 0
             UIView.animateWithDuration(0.3, animations: {
                 () -> Void in
@@ -43,6 +45,8 @@ class RootViewController: UIViewController {
                 completion: {
                     (completed) -> Void in
                     if completed {
+                      
+            
                         if self.selectionState == .FavouritesSwipe {
                             // can ignore this state for now
                             self.performSegueWithIdentifier("FaveSegue", sender: self)
@@ -56,6 +60,8 @@ class RootViewController: UIViewController {
                             self.displayEmbeddedViewController.counter++
                         }
                         self.selectionState = .NoSelection
+                        
+                        
                     }
             })
             
@@ -83,6 +89,7 @@ class RootViewController: UIViewController {
                 } else {
                     println("Nothing selected")
                     selectionState = .NoSelection
+                    
                 }
             }
         }

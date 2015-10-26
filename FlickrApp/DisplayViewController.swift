@@ -73,18 +73,19 @@ class DisplayViewController: UIViewController {
   
     
     var counter = 0
-
-    @IBAction func nextLabel(sender: AnyObject) {
-        println("tapped!")
-     
-        if counter >= photoArray.count {
-            counter = 0
-        }
-        
-        updateImage()
-        counter++
-    }
+//
+//    @IBAction func nextLabel(sender: AnyObject) {
+//        println("tapped!")
+//     
+//        if counter >= photoArray.count {
+//            counter = 0
+//        }
+//        
+//        updateImage()
+//        counter++
+//    }
     
+  
 
     func updateImage() {
         
@@ -102,7 +103,7 @@ class DisplayViewController: UIViewController {
         // https://farm{farm-id}.staticflickr.com/{server-id}/{id {secret}.jpg
         let flickrURL = "https://farm" + farmID + ".staticflickr.com/" + serverID + "/" + imageID + "_" + secretID + ".jpg"
         
-      // if let imageUrl:String = photoArray[counter]["url_m"] as? String{
+   
         
         println("Image Url: \(flickrURL)")
             let imageURL = NSURL(string: flickrURL)
@@ -130,8 +131,15 @@ class DisplayViewController: UIViewController {
         
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+       // flickrImage.image = UIImage(named: "yorkmills")
+        
+       
+          //let imageID = currentPhoto.valueForKey("id") as! String
         storyContainer.alpha = 0.0
          imageDataSource.getImagesFromFlickrWithCallback {
                 (images) -> () in

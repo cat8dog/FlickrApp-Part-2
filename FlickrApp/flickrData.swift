@@ -16,7 +16,7 @@ class FlickrData: NSObject {
     let photosetID = "72157612629420900"
     let userID = "33185468@N02"
     let extras = "description"
-    
+    let photo = "url_m"
     
     //GAVIN *** need extras to have multiple items: description and url_m
     //let extras = "description" // extras should also include "url_m"
@@ -33,7 +33,8 @@ class FlickrData: NSObject {
             //"user_id": userID,
             "extras": extras,
             "format": dataFormat,
-            "nojsoncallback": noJSONCallback
+            "nojsoncallback": noJSONCallback,
+            "url_m": photo
         ]
         
         let session = NSURLSession.sharedSession()
