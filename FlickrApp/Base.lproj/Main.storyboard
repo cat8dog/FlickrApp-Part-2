@@ -283,6 +283,7 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="0.17999999999999999" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="B1P-23-HtY" firstAttribute="leading" secondItem="aMG-bZ-Ze3" secondAttribute="leading" id="43N-lI-Ol4"/>
                             <constraint firstAttribute="centerX" secondItem="HB4-H1-B6I" secondAttribute="centerX" id="5yb-o8-1dS"/>

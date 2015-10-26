@@ -11,26 +11,47 @@ class DisplayViewController: UIViewController {
     
     private let imageDataSource = FlickrData()
     
+   
+    
     var photoArray:[[String:AnyObject]] = []
     
     private var embeddedViewController: StoryViewController!
     
-    @IBAction func showStory(sender: AnyObject) {
-        println("STORY!")
-        
-        var alpha:CGFloat = 1.0
-        
-        if self.storyContainer.alpha == 1.0 {
-            alpha = 0.0
-        }
-        
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
-            
-            self.storyContainer.alpha = alpha
-        })
-        
-        
-    }
+//    @IBAction func longPressStory(sender: UILongPressGestureRecognizer) {
+//     
+//        println("STORY!")
+//        if sender.state == UIGestureRecognizerState.Began {
+//        
+//        var alpha:CGFloat = 1.0
+//        
+//        if self.storyContainer.alpha == 0.5 {
+//            alpha = 0.0
+//            println("/(alpha)")
+//        }
+//        
+//        UIView.animateWithDuration(0.3, animations: { () -> Void in
+//            
+//            self.storyContainer.alpha = alpha
+//        })
+//        }
+//        
+//    }
+//    @IBAction func showStory(sender: AnyObject) {
+//        println("STORY!")
+//        
+//        var alpha:CGFloat = 1.0
+//        
+//        if self.storyContainer.alpha == 1.0 {
+//            alpha = 0.0
+//        }
+//        
+//        UIView.animateWithDuration(0.3, animations: { () -> Void in
+//            
+//            self.storyContainer.alpha = alpha
+//        })
+//        
+//        
+//    }
   
     @IBOutlet var flickrImage: UIImageView!
     
@@ -44,8 +65,7 @@ class DisplayViewController: UIViewController {
   
     
     var counter = 0
-    //var storyAlpha:UIView = UIView(storyContainer)
-    
+
     @IBAction func nextLabel(sender: AnyObject) {
         println("tapped!")
      
@@ -53,20 +73,10 @@ class DisplayViewController: UIViewController {
             counter = 0
         }
         
-        
-       // updateLabel()
         updateImage()
-      //  updateStory()
         counter++
     }
     
-    
-//    
-//    func updateLabel() {
-//        var chosenTitle = mockTitles[counter]
-//        testArray.text = chosenTitle
-//        println("\(chosenTitle)")
-//    }
 
     func updateImage() {
         
@@ -118,15 +128,68 @@ class DisplayViewController: UIViewController {
          imageDataSource.getImagesFromFlickrWithCallback {
                 (images) -> () in
             self.photoArray = images
-            println("******Hi Cat!*****")
-    
-            println("BLLAAAAH \(self.photoArray)")
+       
+            var gesture: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: "longPressed:")
+        //    var gestdismissKeys: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: "dismissedKeys:")
             
+            self.view.addGestureRecognizer(gesture)
+            
+            gesture.minimumPressDuration = 1.0
+            
+
         }
         
     }
-
-
+    
+    func longPressed(longPress: UIGestureRecognizer) {
+        var alpha:CGFloat = 1.0
+        
+        if (longPress.state == UIGestureRecognizerState.Ended) {
+            if self.storyContainer.alpha == 1.0 {
+                alpha = 1.0
+            } else {self.storyContainer == 0.0}
+            println("ended")
+        }
+        
+      else if (longPress.state == UIGestureRecognizerState.Began) {
+            
+            println("Began")
+            if self.storyContainer.alpha == 1.0 {
+                alpha = 0.0
+                
+                println("alpha")
+        }
+        
+      
+//
+//        } else if (longPress.state == UIGestureRecognizerState.Ended) {
+//            println("Ended")
+//            println("STORY!")
+//            
+//            
+//            
+//            } else if (longPress.state == UIGestureRecognizerState.Cancelled) {
+//                self.storyContainer.alpha == 0.0
+//            }
+        
+        UIView.animateWithDuration(0.3, animations: {() -> Void in
+            self.storyContainer.alpha = alpha
+            
+            })
+     }
+    }
+    
+        
+//        if self.storyContainer.alpha == 0.5 {
+//        alpha = 0.0
+//        println("/(alpha)")
+//        }
+//        
+//        UIView.animateWithDuration(0.3, animations: { () -> Void in
+//        
+//        self.storyContainer.alpha = alpha
+//        })
+//        }
     
 
     override func viewDidAppear(animated: Bool) {
