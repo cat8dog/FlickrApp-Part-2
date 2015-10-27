@@ -4,7 +4,7 @@ import UIKit
 class InfoViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
     // will contain text per label
-    var tableData: [String] = ["bio","webPage", "news", "contact"]
+    var tableData: [String] = ["bio","website", "news", "contact"]
     var tableImages: [String] = ["bio.png", "webPage.png", "news.png", "contact.png"]
 
 

@@ -3,11 +3,15 @@ import UIKit
 
 class RootViewController: UIViewController {
 
+//    @IBOutlet weak var titleDisplay: UINavigationItem!
+//    var currentTitle = ""
     @IBOutlet weak var imageContainterCentreConstraint: NSLayoutConstraint!
    
-    @IBOutlet weak var showFavourites: UIBarButtonItem!
-    @IBOutlet var showInfoi: UINavigationItem!
+    //@IBOutlet weak var showFavourites: UIBarButtonItem!
+   // @IBOutlet var showInfo: UINavigationItem!
 
+    @IBOutlet weak var showFavourites: UIBarButtonItem!
+    @IBOutlet weak var showInfo: UIBarButtonItem!
     
     private var displayEmbeddedViewController: DisplayViewController!
     @IBOutlet weak var displayContainer: UIView!
@@ -20,6 +24,12 @@ class RootViewController: UIViewController {
     
     var selectionState = SelectionState.NoSelection
 
+    
+//    func updateTitleText() {
+//        if let titleTextView = titleDisplay {
+//            titleTextView.title = currentTitle
+//        }
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,7 +78,7 @@ class RootViewController: UIViewController {
         default:
             println("Touches Continued")
             var translation = sender.translationInView(self.view)
-            if abs(translation.x) < view.bounds.size.width / 2 {
+            if abs(translation.x) < view.bounds.size.width / 3 {
                 
                 
                 if abs(translation.y) > 60 {

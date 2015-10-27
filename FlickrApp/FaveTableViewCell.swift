@@ -3,7 +3,7 @@ import UIKit
 
 class FaveTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var thumbnailImageView: UIImageView!
+    @IBOutlet weak var thumbnailImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var storyTextView: UITextView!
     

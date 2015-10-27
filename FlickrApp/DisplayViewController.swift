@@ -13,9 +13,10 @@ class DisplayViewController: UIViewController {
     
     // eventually should be set up to save images to FavouritesViewController.
     @IBAction func saveFavourite(sender: AnyObject) {
-        var selectedPhoto = photoArray[counter]
+        //var selectedPhoto = photoArray[counter]
         //updateImage()
-        
+        saveToFavesVC()
+        println("FAVE PUSH")
             
         }
     
@@ -24,40 +25,13 @@ class DisplayViewController: UIViewController {
     var photoArray:[[String:AnyObject]] = []
     
     private var embeddedViewController: StoryViewController!
+    private var favouritesViewController: FavouritesViewController!
+    private var rootViewController: RootViewController!
     
-//    @IBAction func longPressStory(sender: UILongPressGestureRecognizer) {
-//     
-//        println("STORY!")
-//        if sender.state == UIGestureRecognizerState.Began {
-//        
-//        var alpha:CGFloat = 1.0
-//        
-//        if self.storyContainer.alpha == 0.5 {
-//            alpha = 0.0
-//            println("/(alpha)")
-//        }
-//        
-//        UIView.animateWithDuration(0.3, animations: { () -> Void in
-//            
-//            self.storyContainer.alpha = alpha
-//        })
-//        }
-//        
-//    }
+
     @IBAction func showStory(sender: AnyObject) {
-        println("STORY!")
         
-        var alpha:CGFloat = 1.0
-        
-        if self.storyContainer.alpha == 1.0 {
-            alpha = 0.0
-        }
-        
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
-            
-            self.storyContainer.alpha = alpha
-        })
-        
+        updateImage()
         
     }
   
@@ -89,7 +63,6 @@ class DisplayViewController: UIViewController {
 
     func updateImage() {
         
-        println("test for gavin --- *** --- \(photoArray)")
         
         let currentPhoto = photoArray.reverse()[counter] as NSDictionary
         
@@ -111,17 +84,22 @@ class DisplayViewController: UIViewController {
                 flickrImage.image = UIImage(data: imageData)
                 
                 testArray.text = flickrTitle
-             
+                
+//                if let flickrTitle = currentPhoto.valueForKey("title") as? String {
+//                self.updateTitle( flickrTitle )
+                //}
                 if let description = currentPhoto.valueForKey("description") as? NSDictionary {
                     println("test 1")
                     if let story = description.valueForKey("_content") as? String {
                         self.updateStory( story )
                         println("test 2")
+                        
                     }
                 }
             } else {
                 println("Image does not exist at \(imageURL)")
             }
+        
         }
         
     
@@ -131,22 +109,21 @@ class DisplayViewController: UIViewController {
         
     }
     
+//    func updateTitle ( chosenTitle:String ) {
+//        rootViewController.currentTitle = chosenTitle
+//        rootViewController.updateTitleText()
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-       // flickrImage.image = UIImage(named: "yorkmills")
-        
-       
-          //let imageID = currentPhoto.valueForKey("id") as! String
+
         storyContainer.alpha = 0.0
          imageDataSource.getImagesFromFlickrWithCallback {
                 (images) -> () in
             self.photoArray = images
        
             var gesture: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: "longPressed:")
-        //    var gestdismissKeys: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: "dismissedKeys:")
             
             self.view.addGestureRecognizer(gesture)
             
@@ -159,11 +136,14 @@ class DisplayViewController: UIViewController {
     
     func longPressed(longPress: UIGestureRecognizer) {
         var alpha:CGFloat = 1.0
+       
         
         if (longPress.state == UIGestureRecognizerState.Ended) {
             if self.storyContainer.alpha == 1.0 {
                 alpha = 1.0
             } else {self.storyContainer == 0.0}
+            
+            
             println("ended")
         }
         
@@ -176,24 +156,30 @@ class DisplayViewController: UIViewController {
                 println("alpha")
         }
         
-      
-//
-//        } else if (longPress.state == UIGestureRecognizerState.Ended) {
-//            println("Ended")
-//            println("STORY!")
-//            
-//            
-//            
-//            } else if (longPress.state == UIGestureRecognizerState.Cancelled) {
-//                self.storyContainer.alpha == 0.0
-//            }
         
         UIView.animateWithDuration(0.3, animations: {() -> Void in
             self.storyContainer.alpha = alpha
             
+            
             })
      }
     }
+    
+    func saveToFavesVC() {
+       
+  
+        let displayViewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("favouritesViewId") as! UIViewController
+        //self.presentViewController(FavouritesViewController(), animated: false, completion: nil)
+        
+        
+        
+    }
+    
+    
+//    func updateLabel ( chosenLabel:String ) {
+//       favouritesViewController.currentTitle = chosenLabel
+//        favouritesViewController.updateTheLabel()
+//    }
     
 
     
@@ -202,15 +188,18 @@ class DisplayViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+
+        
+        
+    
+    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let vc = segue.destinationViewController as? StoryViewController
             where segue.identifier == "EmbedSegue" {
                 self.embeddedViewController = vc
-             
-//        } else if let faveVC = segue.destinationViewController as? FavouritesViewController
-//            where segue.identifier == "segueFave" {
-//            FavouritesViewController
+                
+
         }
     }
 

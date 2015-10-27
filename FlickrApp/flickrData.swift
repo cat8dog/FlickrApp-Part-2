@@ -7,7 +7,7 @@ class FlickrData: NSObject {
    let baseURL = "https://api.flickr.com/services/rest"
     //let methodName = "flickr.galleries.getPhotos"
     
-   // GAVIN *** By changing the method I was able to access my own album (which is NOT considered a gallery)
+
     let methodName = "flickr.photosets.getPhotos"
     let APIKey = "88ee32cee1b0938e096f3307a996b280"
     //let galleryID = "136294158-72157659526447160"
@@ -18,7 +18,7 @@ class FlickrData: NSObject {
     let extras = "description"
     let photo = "url_m"
     
-    //GAVIN *** need extras to have multiple items: description and url_m
+   
     //let extras = "description" // extras should also include "url_m"
     let dataFormat = "json"
     let noJSONCallback = "1"

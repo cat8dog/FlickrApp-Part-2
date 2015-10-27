@@ -15,20 +15,23 @@ class StoryViewController: UIViewController {
     var currentStory = ""
     
     @IBOutlet weak var storyTextView: UITextView!
+
     
-    @IBAction func storyAlphonzo(sender: AnyObject) {
-    // self.view.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(1.0)
-        toggleView()
-       
-    
-        println("tapped!!")
-    }
+//    @IBAction func storyAlphonzo(sender: AnyObject) {
+//    // self.view.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(1.0)
+//        toggleView()
+//       
+//    
+//        println("tapped!!")
+//    }
 
     
     //var viewIsHidden:Bool = false
     override func viewWillAppear(animated: Bool) {
         var hideView: () = self.view.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.0)
-        
+       
+        storyTextView.scrollEnabled = true
+        storyTextView.selectable = false
     }
     
     func showView () -> Bool {
@@ -58,6 +61,8 @@ class StoryViewController: UIViewController {
         super.viewDidLoad()
     
     }
+    
+  
     
  
     override func didReceiveMemoryWarning() {
