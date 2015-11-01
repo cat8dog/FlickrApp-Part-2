@@ -56,7 +56,7 @@ class FlickrData: NSObject {
                 //if let photosDictionary = parsedResult.valueForKey("photos") as? NSDictionary {
                 if let photosDictionary = parsedDictionary.valueForKey("photoset") as? NSDictionary {
                     if let photoArray = photosDictionary.valueForKey("photo") as? [[String: AnyObject]] {
-
+                        if let storyArray = photosDictionary.valueForKey("extras") as? [[String: AnyObject]] {
                      callback(photoArray)
                        
                        
@@ -72,7 +72,7 @@ class FlickrData: NSObject {
                 
             }
         }
-        
+    }
         task.resume()
     }
     

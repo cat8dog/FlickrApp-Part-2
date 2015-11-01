@@ -3,6 +3,9 @@ import UIKit
 
 class DisplayViewController: UIViewController {
     
+    @IBAction func savesToFavourites(sender: AnyObject) {
+        updateFavourites()
+    }
 
     
    // http://stackoverflow.com/questions/29582200/how-do-i-get-the-views-inside-a-container-in-swift
@@ -76,18 +79,28 @@ class DisplayViewController: UIViewController {
         // https://farm{farm-id}.staticflickr.com/{server-id}/{id {secret}.jpg
         let flickrURL = "https://farm" + farmID + ".staticflickr.com/" + serverID + "/" + imageID + "_" + secretID + ".jpg"
         
-   
-        
         println("Image Url: \(flickrURL)")
             let imageURL = NSURL(string: flickrURL)
-            if let imageData = NSData(contentsOfURL: imageURL!) {
-                flickrImage.image = UIImage(data: imageData)
-                
+        
+        if let imageData = NSData(contentsOfURL: imageURL!) {
+            flickrImage.image = UIImage(data: imageData)
+            
+            loadNextSwipe()
+          //  getCurrentPhotoInfo()
+            println("8888888 The image is \(flickrImage), the title is \(flickrTitle) and the description is \(description)")
+
+        } else {
+            println("Image does not exist at \(imageURL)")
+        }
+        
+    }
+    
+        func loadNextSwipe() {
+            var flickrTitle = String?()
+            var currentPhoto = NSDictionary.self
+
                 testArray.text = flickrTitle
-                
-//                if let flickrTitle = currentPhoto.valueForKey("title") as? String {
-//                self.updateTitle( flickrTitle )
-                //}
+
                 if let description = currentPhoto.valueForKey("description") as? NSDictionary {
                     println("test 1")
                     if let story = description.valueForKey("_content") as? String {
@@ -95,12 +108,25 @@ class DisplayViewController: UIViewController {
                         println("test 2")
                         
                     }
+                
+                let compiledInfo = getCurrentPhotoInfo()
+                    println("8888888 The image is \(flickrImage), the title is \(flickrTitle) and the description is \(description)")
+                    println("WE'RE HIT")
                 }
-            } else {
-                println("Image does not exist at \(imageURL)")
-            }
+         
         
         }
+        
+    
+    func getCurrentPhotoInfo() -> (image: String, title: String, description: String) {
+    return("flickrImage", "flickrTitle", "desctription")
+    
+    }
+    
+    func updateFavourites() {
+        let compiledInfo = getCurrentPhotoInfo()
+        favouritesViewController.currentPhoto = compiledInfo
+    }
         
     
     func updateStory( chosenStory:String ) {
@@ -170,7 +196,7 @@ class DisplayViewController: UIViewController {
   
         let displayViewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("favouritesViewId") as! UIViewController
         //self.presentViewController(FavouritesViewController(), animated: false, completion: nil)
-        
+        favouritesViewController.currentPhoto = getCurrentPhotoInfo()
         
         
     }

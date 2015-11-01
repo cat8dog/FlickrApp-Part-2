@@ -11,7 +11,11 @@ class FavouritesViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     
-    var currentTitle = ""
+    var currentPhoto = (image: String(), title: String(), description: String())
+    
+    func printCurrentPhoto() {
+        println("Halloween Special! \(currentPhoto)")
+    }
    
     @IBOutlet var favouritesTable: UITableView!
     var faveIndexPath: NSIndexPath = NSIndexPath()
@@ -23,6 +27,7 @@ class FavouritesViewController: UIViewController, UITableViewDataSource, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        printCurrentPhoto()
         
     }
     
