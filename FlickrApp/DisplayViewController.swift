@@ -3,9 +3,6 @@ import UIKit
 
 class DisplayViewController: UIViewController {
     
-    @IBAction func savesToFavourites(sender: AnyObject) {
-        updateFavourites()
-    }
 
     
    // http://stackoverflow.com/questions/29582200/how-do-i-get-the-views-inside-a-container-in-swift
@@ -14,15 +11,7 @@ class DisplayViewController: UIViewController {
     
     private let imageDataSource = FlickrData()
     
-    // eventually should be set up to save images to FavouritesViewController.
-    @IBAction func saveFavourite(sender: AnyObject) {
-        //var selectedPhoto = photoArray[counter]
-        //updateImage()
-        saveToFavesVC()
-        println("FAVE PUSH")
-            
-        }
-    
+
    
     
     var photoArray:[[String:AnyObject]] = []
@@ -62,7 +51,7 @@ class DisplayViewController: UIViewController {
 //        counter++
 //    }
     
-  
+ 
 
     func updateImage() {
         
@@ -85,8 +74,18 @@ class DisplayViewController: UIViewController {
         if let imageData = NSData(contentsOfURL: imageURL!) {
             flickrImage.image = UIImage(data: imageData)
             
-            loadNextSwipe()
-          //  getCurrentPhotoInfo()
+            var flickrTitle = String?()
+            var currentPhoto = NSDictionary.self
+            
+            testArray.text = flickrTitle
+            
+            if let description = currentPhoto.valueForKey("description") as? NSDictionary {
+                println("test 1")
+                if let story = description.valueForKey("_content") as? String {
+                    self.updateStory( story )
+                    println("test 2")
+                    
+                }
             println("8888888 The image is \(flickrImage), the title is \(flickrTitle) and the description is \(description)")
 
         } else {
@@ -95,38 +94,19 @@ class DisplayViewController: UIViewController {
         
     }
     
-        func loadNextSwipe() {
-            var flickrTitle = String?()
-            var currentPhoto = NSDictionary.self
-
-                testArray.text = flickrTitle
-
-                if let description = currentPhoto.valueForKey("description") as? NSDictionary {
-                    println("test 1")
-                    if let story = description.valueForKey("_content") as? String {
-                        self.updateStory( story )
-                        println("test 2")
-                        
-                    }
+    
+    
                 
-                let compiledInfo = getCurrentPhotoInfo()
-                    println("8888888 The image is \(flickrImage), the title is \(flickrTitle) and the description is \(description)")
-                    println("WE'RE HIT")
-                }
+              
+                
          
         
         }
         
     
-    func getCurrentPhotoInfo() -> (image: String, title: String, description: String) {
-    return("flickrImage", "flickrTitle", "desctription")
     
-    }
     
-    func updateFavourites() {
-        let compiledInfo = getCurrentPhotoInfo()
-        favouritesViewController.currentPhoto = compiledInfo
-    }
+ 
         
     
     func updateStory( chosenStory:String ) {
@@ -148,16 +128,14 @@ class DisplayViewController: UIViewController {
          imageDataSource.getImagesFromFlickrWithCallback {
                 (images) -> () in
             self.photoArray = images
-       
-            var gesture: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: "longPressed:")
-            
-            self.view.addGestureRecognizer(gesture)
-            
-            gesture.minimumPressDuration = 1.0
-            
 
         }
         
+        var gesture: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: "longPressed:")
+        
+        self.view.addGestureRecognizer(gesture)
+        
+        gesture.minimumPressDuration = 1.0
     }
     
     func longPressed(longPress: UIGestureRecognizer) {
@@ -191,15 +169,6 @@ class DisplayViewController: UIViewController {
      }
     }
     
-    func saveToFavesVC() {
-       
-  
-        let displayViewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("favouritesViewId") as! UIViewController
-        //self.presentViewController(FavouritesViewController(), animated: false, completion: nil)
-        favouritesViewController.currentPhoto = getCurrentPhotoInfo()
-        
-        
-    }
     
     
 //    func updateLabel ( chosenLabel:String ) {

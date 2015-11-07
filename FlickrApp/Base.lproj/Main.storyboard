@@ -294,12 +294,6 @@
                             <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bailOut" translatesAutoresizingMaskIntoConstraints="NO" id="uLQ-cL-dms">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
-                            <containerView opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B1P-23-HtY">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <connections>
-                                    <segue destination="EnD-nC-Olq" kind="embed" identifier="EmbedSegue" id="Q5Z-ix-CFh"/>
-                                </connections>
-                            </containerView>
                             <button opaque="NO" alpha="0.5" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HB4-H1-B6I">
                                 <rect key="frame" x="289" y="558" width="188" height="30"/>
                                 <constraints>
@@ -354,23 +348,18 @@
                                 </constraints>
                                 <blurEffect style="light"/>
                             </visualEffectView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hZZ-CG-CWx">
-                                <rect key="frame" x="277" y="505" width="46" height="30"/>
-                                <color key="backgroundColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="FAVES">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
+                            <containerView opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B1P-23-HtY">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <connections>
-                                    <action selector="savesToFavourites:" destination="Rim-AJ-b1T" eventType="touchUpInside" id="uy0-0v-gFa"/>
+                                    <segue destination="EnD-nC-Olq" kind="embed" identifier="EmbedSegue" id="Q5Z-ix-CFh"/>
                                 </connections>
-                            </button>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="0.17999999999999999" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="B1P-23-HtY" firstAttribute="leading" secondItem="aMG-bZ-Ze3" secondAttribute="leading" id="43N-lI-Ol4"/>
                             <constraint firstAttribute="centerX" secondItem="HB4-H1-B6I" secondAttribute="centerX" id="5yb-o8-1dS"/>
-                            <constraint firstItem="HB4-H1-B6I" firstAttribute="top" secondItem="hZZ-CG-CWx" secondAttribute="bottom" constant="23" id="8LX-vv-7Ab"/>
                             <constraint firstItem="B1P-23-HtY" firstAttribute="top" secondItem="MYO-xF-ktB" secondAttribute="bottom" id="9dR-bE-KNS"/>
                             <constraint firstItem="uLQ-cL-dms" firstAttribute="leading" secondItem="aMG-bZ-Ze3" secondAttribute="leading" id="Ez8-ze-3Uh"/>
                             <constraint firstAttribute="trailing" secondItem="uLQ-cL-dms" secondAttribute="trailing" id="JTV-DT-2kO"/>
@@ -382,7 +371,6 @@
                             <constraint firstAttribute="trailing" secondItem="B1P-23-HtY" secondAttribute="trailing" id="h3u-2l-u2l"/>
                             <constraint firstItem="KmP-hr-ekh" firstAttribute="top" secondItem="B1P-23-HtY" secondAttribute="bottom" id="jO9-a2-M6g"/>
                             <constraint firstAttribute="trailing" secondItem="gMJ-NE-1VG" secondAttribute="trailing" id="tmv-wZ-z40"/>
-                            <constraint firstItem="hZZ-CG-CWx" firstAttribute="centerX" secondItem="gMJ-NE-1VG" secondAttribute="centerX" id="uoR-Pb-7gC"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
